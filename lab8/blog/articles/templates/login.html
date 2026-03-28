@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Django Public Blog - вход в систему</title>
+    <link rel="stylesheet" href="{% static 'css/archive.css' %}">
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'archive' %}"><img src="{% static 'img/dpb-logo.png' %}" /></a>
+    </div>
+    <div class="archive">
+        <a href="{% url 'archive' %}" class="return-link">&larr; К списку статей</a>
+        <div class="form-section">
+            <h2>Вход в систему</h2>
+            <form method="POST">{% csrf_token %}
+                <input type="text" name="username" placeholder="Логин" value="{{ form.username }}">
+                <input type="password" name="password" placeholder="Пароль">
+                <input type="submit" value="Авторизоваться">
+            </form>
+            {% if form.errors %}
+            <div class="field-errors">{{ form.errors }}</div>
+            {% endif %}
+            <p class="login-hint">Ещё нет аккаунта? <a href="{% url 'register' %}">Создать учётную запись</a></p>
+        </div>
+    </div>
+</body>
+</html>
