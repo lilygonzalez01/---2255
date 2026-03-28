@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Django Public Blog - новая публикация</title>
+    <link rel="stylesheet" href="{% static 'css/archive.css' %}">
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'archive' %}"><img src="{% static 'img/dpb-logo.png' %}" /></a>
+    </div>
+    <div class="archive">
+        <a href="{% url 'archive' %}" class="return-link">&larr; К списку статей</a>
+        <div class="form-section">
+            <h2>Создать публикацию</h2>
+            <form method="POST">{% csrf_token %}
+                <input type="text" name="title" placeholder="Заголовок публикации" value="{{ form.title }}">
+                <textarea name="text" placeholder="Содержание публикации">{{ form.text }}</textarea>
+                <input type="submit" value="Опубликовать">
+            </form>
+            {% if form.errors %}
+            <div class="field-errors">{{ form.errors }}</div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
